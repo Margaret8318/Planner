@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting Room: {{room.name}}/</title>
+</head>
+<body>
+    <h1> {{room.name}}</h1>
+    <p>
+        This meeting is located on the <strong> {{room.floor_number}}</strong> floor, as 
+         room number <strong>{{room.room_number}}</strong>.
+    </p>
+    <a href="{% url 'home' %}"> Return to home page </a>
+</body>
+</html>
