@@ -1,0 +1,4 @@
+[flake8]
+include = src,tests
+exclude = venv,docs
+max-line-length = 125

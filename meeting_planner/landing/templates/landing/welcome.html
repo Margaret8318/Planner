@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WELCOME!</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
     <h1> Welcome to the Meeting Planner!</h1>
     <p>
         This is a simple meeting planner application.
@@ -14,7 +11,7 @@
     <ul>
         {% for meeting in meetings%}
             <li>
-                <a href="{% url 'detail' meeting.id %}">
+                <a href="{% url 'meeting' meeting.id %}">
                     {{meeting.title}}
                 </a>
             </li>
@@ -30,5 +27,4 @@
             </li>
         {%endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

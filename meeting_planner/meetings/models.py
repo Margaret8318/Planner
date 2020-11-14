@@ -13,6 +13,7 @@ class Room(models.Model):
     def __str__(self):
         return f'{self.name}: room {self.room_number} on floor {self.floor_number}'
 
+
 class Meeting(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
