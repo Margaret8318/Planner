@@ -2,11 +2,14 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <h1> Welcome to the Meeting Planner!</h1>
+    <h1> Hello {{ user.username|default:'Guest' }}, Welcome to the Meeting Planner!</h1>
     <p>
         This is a simple meeting planner application.
         It allows you to book a meeting, add a room and attendees.
     </p>
+    
+<div>
+    {% if user.is_authenticated %}
     <h2>Meetings</h2>
     <ul>
         {% for meeting in meetings%}
@@ -17,6 +20,32 @@
             </li>
         {%endfor %}
     </ul>
+    {% if meetings.has_other_pages %}
+    <ul>
+        <p class="pagination">
+            {% if meetings.has_previous %}
+                <p><a href="?page={{meetings.previous_page_number}}">&laquo;</a></p>
+            {% else%}
+            <p class="disabled"<span>&laquo;</span></p>
+            {%endif %}
+        
+        {% for i in meetings.paginator.page_range%}
+            {% if meetings.number == i %}
+            <p class="active"> <span>{{ i }}<span class= "sr-only">(current) </span></span></p>
+            {% else %}
+                <a href="?page={{ i }}"></a>
+            {%endif %}
+        {%endfor %}
+        {% if meetings.has_next %}
+            <p><a href="?page={{meetings.next_page_number}}">&laquo;</a></p>
+        {% else %}
+            <p class="disabled"<span>&laquo;</span></p>
+        {%endif %}
+        </p>
+    </ul>
+    {%endif %}
+
+    
     <h2>Rooms</h2>
     <ul>
         {% for room in rooms%}
@@ -27,4 +56,11 @@
             </li>
         {%endfor %}
     </ul>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'password_change' %}">Change password</a>
+    {% else %}
+        <p> Login to view and create meetings</p>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
 {% endblock %}
